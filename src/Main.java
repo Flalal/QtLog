@@ -8,6 +8,8 @@ import java.util.TreeSet;
 
 public class Main {
 
+	static int cpt =0;
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
@@ -67,6 +69,7 @@ public class Main {
 			System.out.println(Arrays.asList(premier));
 			System.out.println(Arrays.asList(valeur));
 		*/
+			System.out.println(cpt);
 		}
 
 	}
@@ -117,12 +120,62 @@ public class Main {
 				motValeur[j] = mapCharacter.get(mots[i].charAt(j));
 			}
 
-			System.out.println(Arrays.asList(motValeur));
+			//System.out.println(mots[i] + " : " + Arrays.asList(motValeur));
 			sums[i]=motValeur;
 			
 		}
 		
-		System.out.println(Arrays.asList(sums[0]));
+
+		
+		int sommeTotal[][] = new int[2][sums[sums.length-1].length];
+
+		for (int i = 0; i < sums.length; i++) {
+			for (int j = 0 ; j < sums[i].length ; j++) {
+				if(i == sums.length-1) {
+					sommeTotal[1][j] = sums[i][j];
+				}
+				else {
+					sommeTotal[0][j] += sums[i][j];
+				}
+			}
+
+				
+		}
+		
+		
+		
+		
+		System.out.print("Send + More : ");
+		for (int i = 0; i < sommeTotal[0].length; i++) {
+			System.out.print(sommeTotal[0][i] + " ");
+		}
+		System.out.println();
+
+		System.out.print("Money : ");
+		for (int i = 0; i < sommeTotal[1].length; i++) {
+			System.out.print(sommeTotal[1][i] + " ");
+		}
+		System.out.println();
+		
+		
+		
+		
+		for (int j = sommeTotal[1].length-1 ; j >= 0; j--) {
+			System.out.println(sommeTotal[0][j-1]);
+			
+			if(sommeTotal[0][j-1] % 10 != sommeTotal[1][j]) {
+				return;
+			}
+			else {
+				int retenu = sommeTotal[0][j-1]/10;
+				sommeTotal[0][j-1] += retenu;
+				cpt++;
+			}
+			
+			
+		}
+		cpt++;
+		
 		
 	}
 	

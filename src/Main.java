@@ -142,7 +142,17 @@ public class Main {
 				
 		}
 		
-		
+		boolean decale = false;
+		for (int j = sommeTotal[1].length-1 ; j >= 0; j--) {
+			if(j == 0){
+				sommeTotal[0][j]=0;
+			}
+			else if(sommeTotal[0][j]==0 || decale) {
+				sommeTotal[0][j]=sommeTotal[0][j-1];
+				//System.out.println(sommeTotal[0][j]);
+				decale=true;
+			}
+		}
 		
 		
 		System.out.print("Send + More : ");
@@ -158,18 +168,22 @@ public class Main {
 		System.out.println();
 		
 		
-		
-		
+		int retenu = 0;
 		for (int j = sommeTotal[1].length-1 ; j >= 0; j--) {
-			System.out.println(sommeTotal[0][j-1]);
-			
-			if(sommeTotal[0][j-1] % 10 != sommeTotal[1][j]) {
+			//System.out.println(sommeTotal[0][j-1]);
+			//System.out.println(sommeTotal[1][j]);
+			if(sommeTotal[0][j] % 10 != sommeTotal[1][j]) {
 				return;
 			}
 			else {
-				int retenu = sommeTotal[0][j-1]/10;
-				sommeTotal[0][j-1] += retenu;
-				cpt++;
+				retenu = sommeTotal[0][j]/10;
+				//System.out.println(sommeTotal[0][j-1]);
+				if(j==0)
+					return;
+				else {
+					sommeTotal[0][j-1] += retenu;
+				}
+				//System.out.println(sommeTotal[0][j]);
 			}
 			
 			
